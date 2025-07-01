@@ -57,12 +57,15 @@ contract Escrow is ReentrancyGuard {
 
     // Function for the buyer to confirm the task and release funds to the worker
     // Added nonReentrant to prevent reentrancy attacks
-    function confirmWork() public onlyBuyer nonReentrant {
-        require(taskCompleted, "Task not completed yet"); // Ensure the task is completed before confirming
-        require(block.timestamp <= refundDeadline, "Refund window has closed"); // Ensure refund window is still open
-        payable(worker).transfer(amount); // Transfer the agreed amount to the worker
-        emit WorkConfirmed(msg.sender, worker, block.timestamp); // Log the work confirmation event
-    }
+  function confirmWork() public onlyBuyer nonReentrant {
+    require(taskCompleted, "Task not completed yet");
+    require(block.timestamp <= refundDeadline, "Refund window has closed");
+
+    taskCompleted = false; // (if needed to mark done or add state logic first)
+    payable(worker).transfer(amount);
+    emit WorkConfirmed(msg.sender, worker, block.timestamp);
+}
+
 
     // Function for the buyer to request a refund (if the task is not completed)
     // Added nonReentrant to prevent reentrancy attacks
