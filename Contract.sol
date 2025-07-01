@@ -45,11 +45,7 @@ contract Escrow is ReentrancyGuard {
         _;
     }
 
-    // Function for the buyer to deposit the agreed amount to the contract
-    function amountAdd() public payable onlyBuyer {
-        require(msg.value == amount, "Incorrect amount sent"); // Ensures the buyer sends the correct amount
-        emit addMoney(msg.sender, msg.value); // Log the event
-    }
+   
 
     // Function for the worker to mark the task as completed
     function completetask() public onlyWorker {
@@ -81,7 +77,9 @@ contract Escrow is ReentrancyGuard {
     function contractBalance() external view returns (uint256) {
         return address(this).balance; // Return the contract's current balance
     }
-function amntAdd() public payable onlyBuyer {
+ // Function for the buyer to deposit the agreed amount to the contract
+
+function amounntAdd() public payable onlyBuyer {
     require(address(this).balance == 0, "Already funded");
     require(msg.value == amount, "Incorrect amount sent");
     emit addMoney(msg.sender, msg.value);
