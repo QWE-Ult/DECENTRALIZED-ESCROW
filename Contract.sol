@@ -91,5 +91,10 @@ receive() external payable {
 fallback() external payable {
     revert("Use amountAdd()");
 }
+// Allow buyer to cancel the deal (if not funded yet)
+function cancelDeal() external onlyBuyer {
+    require(address(this).balance == 0, "Cannot cancel after funding");
+    selfdestruct(payable(buyer));
+}
 }
 
