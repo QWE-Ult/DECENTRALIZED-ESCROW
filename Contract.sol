@@ -82,7 +82,4 @@ contract Escrow is ReentrancyGuard {
         return address(this).balance; // Return the contract's current balance
     }
 }
-// this are the features i can add
-//  can add reentrant modifier from import
-// can add task status 
 
