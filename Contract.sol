@@ -86,6 +86,12 @@ function amntAdd() public payable onlyBuyer {
     require(msg.value == amount, "Incorrect amount sent");
     emit addMoney(msg.sender, msg.value);
 }
+receive() external payable {
+    revert("Use amountAdd()");
+}
 
+fallback() external payable {
+    revert("Use amountAdd()");
+}
 }
 
