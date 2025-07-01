@@ -81,5 +81,11 @@ contract Escrow is ReentrancyGuard {
     function contractBalance() external view returns (uint256) {
         return address(this).balance; // Return the contract's current balance
     }
+function amountAdd() public payable onlyBuyer {
+    require(address(this).balance == 0, "Already funded");
+    require(msg.value == amount, "Incorrect amount sent");
+    emit addMoney(msg.sender, msg.value);
+}
+
 }
 
